@@ -6,11 +6,14 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.slidingpanelayout.widget.SlidingPaneLayout
+import com.google.android.material.appbar.MaterialToolbar
 import dagger.hilt.android.AndroidEntryPoint
 import de.szalkowski.activitylauncher.databinding.ActivityMainBinding
 import de.szalkowski.activitylauncher.services.SettingsService
@@ -32,7 +35,11 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
+
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        binding.slidingPaneLayout.lockMode = SlidingPaneLayout.LOCK_MODE_UNLOCKED
 
         settingsService.applyLocaleConfiguration(baseContext)
         if (!settingsService.disclaimerAccepted) {
