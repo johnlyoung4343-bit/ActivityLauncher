@@ -10,25 +10,25 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import de.szalkowski.activitylauncher.R
-import de.szalkowski.activitylauncher.databinding.FragmentFavoritesBinding
+import de.szalkowski.activitylauncher.databinding.FragmentRecentsBinding
 import de.szalkowski.activitylauncher.services.MyActivityInfo
 
-class FavoritesFragment : Fragment() {
-    private var _binding: FragmentFavoritesBinding? = null
+class RecentsFragment : Fragment() {
+    private var _binding: FragmentRecentsBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
+        _binding = FragmentRecentsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
+
         val adapter = MockListAdapter()
-        binding.rvFavorites.adapter = adapter
+        binding.rvRecents.adapter = adapter
     }
 
     override fun onDestroyView() {
@@ -37,25 +37,18 @@ class FavoritesFragment : Fragment() {
     }
 
     class MockListAdapter : RecyclerView.Adapter<MockListAdapter.ViewHolder>() {
-        
+
         private val mockActivities = listOf(
             MyActivityInfo(
-                ComponentName("com.android.settings", "com.android.settings.Settings"),
-                "Settings",
+                ComponentName("com.google.android.youtube", "com.google.android.youtube.app.honeycomb.Shell\$HomeActivity"),
+                "YouTube",
                 android.graphics.drawable.ColorDrawable(0), // Placeholder
                 null,
                 false
             ),
-             MyActivityInfo(
-                ComponentName("com.google.android.gm", "com.google.android.gm.ConversationListActivityGmail"),
-                "Gmail",
-                android.graphics.drawable.ColorDrawable(0), // Placeholder
-                null,
-                false
-            ),
-             MyActivityInfo(
-                ComponentName("com.android.chrome", "com.google.android.apps.chrome.Main"),
-                "Chrome",
+            MyActivityInfo(
+                ComponentName("com.android.deskclock", "com.android.deskclock.DeskClock"),
+                "Clock",
                 android.graphics.drawable.ColorDrawable(0), // Placeholder
                 null,
                 false

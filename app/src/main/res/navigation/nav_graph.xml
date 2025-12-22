@@ -64,4 +64,14 @@
             app:argType="android.content.ComponentName"
             app:nullable="false" />
     </fragment>
+    <fragment
+        android:id="@+id/FavoritesFragment"
+        android:name="de.szalkowski.activitylauncher.ui.FavoritesFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorites" />
+    <fragment
+        android:id="@+id/RecentsFragment"
+        android:name="de.szalkowski.activitylauncher.ui.RecentsFragment"
+        android:label="Recents"
+        tools:layout="@layout/fragment_recents" />
 </navigation>
