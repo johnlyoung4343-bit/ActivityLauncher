@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.core.widget.addTextChangedListener
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -46,8 +45,8 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
             DisclaimerDialogFragment().show(supportFragmentManager, "DisclaimerDialogFragment")
         }
 
-        val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
         val navController = navHostFragment.navController
 
         actionBarSearchView = findViewById(R.id.tiSearch)
@@ -74,20 +73,6 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
 
-        val searchView = menu.findItem(R.id.search).actionView as SearchView
-        searchView.queryHint = getText(R.string.filter_hint)
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                onActionBarSearchListener?.invoke(query.orEmpty())
-                return true
-            }
-
-            override fun onQueryTextChange(query: String?): Boolean {
-                onActionBarSearchListener?.invoke(query.orEmpty())
-                return true
-            }
-        })
-
         return true
     }
 
@@ -108,7 +93,5 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-
-        return true
     }
 }
