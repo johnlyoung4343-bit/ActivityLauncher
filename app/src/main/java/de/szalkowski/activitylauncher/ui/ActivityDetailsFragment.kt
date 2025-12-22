@@ -82,7 +82,7 @@ class ActivityDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Hide the search bar
-        activity?.findViewById<TextInputLayout>(R.id.tiSearch)?.visibility = View.GONE
+        activity?.findViewById<TextInputLayout>(R.id.tilSearch)?.visibility = View.GONE
 
         binding.tiName.setText(activityInfo.name)
         binding.tiPackage.setText(activityInfo.componentName.packageName)
@@ -151,11 +151,11 @@ class ActivityDetailsFragment : Fragment() {
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
         val favoriteItem = menu.findItem(R.id.action_favorite)
-        //if (isFavorite) {
-         //   favoriteItem.setIcon(R.drawable.ic_favorite)
-        //} else {
-         //   favoriteItem.setIcon(R.drawable.ic_favorite_border)
-        //}
+        if (isFavorite) {
+            favoriteItem.setIcon(R.drawable.ic_favorite)
+        } else {
+            favoriteItem.setIcon(R.drawable.ic_favorite_border)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -177,7 +177,7 @@ class ActivityDetailsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         // Restore search bar visibility
-        activity?.findViewById<TextInputLayout>(R.id.tiSearch)?.visibility = View.VISIBLE
+        activity?.findViewById<TextInputLayout>(R.id.tilSearch)?.visibility = View.VISIBLE
         _binding = null
     }
 
