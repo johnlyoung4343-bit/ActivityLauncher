@@ -60,7 +60,7 @@ class ActivityDetailsFragment : Fragment() {
     internal lateinit var favoritesService: FavoritesService
 
     private var _binding: FragmentActivityDetailsBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     private var isFavorite = false
 
@@ -72,7 +72,9 @@ class ActivityDetailsFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentActivityDetailsBinding.inflate(inflater, container, false)
         return binding.root
@@ -116,14 +118,18 @@ class ActivityDetailsFragment : Fragment() {
 
         binding.btLaunch.setOnClickListener {
             activityLauncherService.launchActivity(
-                editedActivityInfo.componentName, asRoot = false, showToast = true
+                editedActivityInfo.componentName,
+                asRoot = false,
+                showToast = true,
             )
             recentActivitiesService.addActivity(editedActivityInfo.componentName, false)
         }
 
         binding.btLaunchAsRoot.setOnClickListener {
             activityLauncherService.launchActivity(
-                editedActivityInfo.componentName, asRoot = true, showToast = true
+                editedActivityInfo.componentName,
+                asRoot = true,
+                showToast = true,
             )
             recentActivitiesService.addActivity(editedActivityInfo.componentName, true)
         }

@@ -21,7 +21,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class RecentsFragment : Fragment() {
     private var _binding: FragmentRecentsBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     @Inject
     internal lateinit var recentActivitiesService: RecentActivitiesService
@@ -30,7 +30,9 @@ class RecentsFragment : Fragment() {
     internal lateinit var activityListService: ActivityListService
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentRecentsBinding.inflate(inflater, container, false)
         return binding.root
@@ -55,7 +57,7 @@ class RecentsFragment : Fragment() {
                 null
             }
         }
-        
+
         val adapter = RecentsListAdapter(activityInfos)
         adapter.onItemClick = { info ->
             runCatching {

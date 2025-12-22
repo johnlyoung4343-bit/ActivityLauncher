@@ -18,7 +18,8 @@ interface PackageListService {
 }
 
 class PackageListServiceImpl @Inject constructor(
-    @ApplicationContext context: Context, val settingsService: SettingsService
+    @ApplicationContext context: Context,
+    val settingsService: SettingsService,
 ) : PackageListService {
 
     private val config: Configuration = settingsService.getLocaleConfiguration()
@@ -26,9 +27,9 @@ class PackageListServiceImpl @Inject constructor(
     private val installedPackages: List<MyPackageInfo> =
         packageManager.getInstalledPackages(
             PackageManager.GET_ACTIVITIES
-                    or PackageManager.MATCH_ALL
-                    or PackageManager.MATCH_DISABLED_COMPONENTS
-                    or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
+                or PackageManager.MATCH_ALL
+                or PackageManager.MATCH_DISABLED_COMPONENTS
+                or PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS,
         ).mapNotNull {
             getPackageInfo(it)
         }.sortedBy { it.name.lowercase() }
@@ -56,12 +57,19 @@ class PackageListServiceImpl @Inject constructor(
             .filter { it != defaultActivityName }
 
         return MyPackageInfo(
-            packageName, name, version, defaultActivityName, activities, icon, iconResourceName
+            packageName,
+            name,
+            version,
+            defaultActivityName,
+            activities,
+            icon,
+            iconResourceName,
         )
     }
 
     private fun getDefaultActivityName(
-        packageName: String, appRes: Resources?
+        packageName: String,
+        appRes: Resources?,
     ): ActivityName? {
         if (appRes == null) {
             return null
@@ -74,7 +82,6 @@ class PackageListServiceImpl @Inject constructor(
             val defaultActivityName = getActivityName(activityInfo, appRes)
             return defaultActivityName
         }.getOrNull()
-
     }
 
     private fun getIcon(app: ApplicationInfo): Drawable {
@@ -86,7 +93,8 @@ class PackageListServiceImpl @Inject constructor(
     }
 
     private fun getIconResourceName(
-        app: ApplicationInfo, appRes: Resources?
+        app: ApplicationInfo,
+        appRes: Resources?,
     ): String? {
         val iconResource = app.icon
 
@@ -98,7 +106,6 @@ class PackageListServiceImpl @Inject constructor(
             appRes.getResourceName(iconResource)
         }.getOrNull()
     }
-
 
     private fun getName(app: ApplicationInfo, appRes: Resources?): String {
         var name = app.loadLabel(packageManager).toString()

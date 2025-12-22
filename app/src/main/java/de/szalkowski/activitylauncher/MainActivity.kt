@@ -65,8 +65,8 @@ class MainActivity : AppCompatActivity(), ActionBarSearch {
                     R.id.LoadingFragment,
                     R.id.PackageListFragment,
                     R.id.FavoritesFragment,
-                    R.id.RecentsFragment
-                )
+                    R.id.RecentsFragment,
+                ),
             )
         setupActionBarWithNavController(navController, appBarConfiguration)
     }

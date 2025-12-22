@@ -16,7 +16,6 @@ import de.szalkowski.activitylauncher.services.SettingsService
 import java.util.Objects
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class SettingsFragment : PreferenceFragmentCompat() {
     private lateinit var prefs: SharedPreferences
@@ -61,19 +60,19 @@ class SettingsFragment : PreferenceFragmentCompat() {
         populateLanguages(languages)
         languages.setOnPreferenceChangeListener { _, newValue ->
             onLanguageUpdated(
-                newValue as String
+                newValue as String,
             )
         }
 
         hidePrivate.setOnPreferenceChangeListener { _, newValue ->
             onHidePrivateUpdated(
-                newValue as Boolean
+                newValue as Boolean,
             )
         }
 
         allowRoot.setOnPreferenceChangeListener { _, newValue ->
             onAllowRootUpdated(
-                newValue as Boolean
+                newValue as Boolean,
             )
         }
 
@@ -117,4 +116,3 @@ class SettingsFragment : PreferenceFragmentCompat() {
         return true
     }
 }
-

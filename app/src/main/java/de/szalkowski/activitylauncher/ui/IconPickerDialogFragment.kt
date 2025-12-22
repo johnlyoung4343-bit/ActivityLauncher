@@ -26,7 +26,7 @@ class IconPickerDialogFragment : DialogFragment(), AsyncProvider.Listener<IconLi
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     override fun onAttach(activity: Context) {
         super.onAttach(activity)
@@ -48,13 +48,13 @@ class IconPickerDialogFragment : DialogFragment(), AsyncProvider.Listener<IconLi
             OnItemClickListener { adapterView: AdapterView<*>, _: View?, index: Int, _: Long ->
                 listener?.iconPicked(
                     // FIXME ugly and unsafe
-                    (adapterView.adapter.getItem(index) as IconLoaderService.IconInfo).iconResourceName
+                    (adapterView.adapter.getItem(index) as IconLoaderService.IconInfo).iconResourceName,
                 )
                 requireDialog().dismiss()
             }
 
         builder.setTitle(R.string.title_dialog_icon_picker).setView(view).setNegativeButton(
-            android.R.string.cancel
+            android.R.string.cancel,
         ) { dialog: DialogInterface?, _: Int ->
             dialog?.cancel()
         }

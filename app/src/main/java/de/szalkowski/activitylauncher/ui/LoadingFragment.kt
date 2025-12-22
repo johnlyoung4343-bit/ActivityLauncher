@@ -37,7 +37,9 @@ class LoadingFragment : Fragment() {
 
     @SuppressLint("RestrictedApi")
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         val intent = activity?.intent
         lifecycleScope.launch {
@@ -48,7 +50,7 @@ class LoadingFragment : Fragment() {
             withContext(Dispatchers.IO) {
                 // preload package list
                 packageListService.get()
-                
+
                 // Check if there is a deep link intent that we should handle directly
                 if (intent != null && viewIntentParserService.packageFromIntent(intent) != null) {
                     hasIntent = true

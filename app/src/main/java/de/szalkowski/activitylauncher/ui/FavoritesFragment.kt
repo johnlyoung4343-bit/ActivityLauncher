@@ -21,7 +21,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class FavoritesFragment : Fragment() {
     private var _binding: FragmentFavoritesBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     @Inject
     internal lateinit var favoritesService: FavoritesService
@@ -30,7 +30,9 @@ class FavoritesFragment : Fragment() {
     internal lateinit var activityListService: ActivityListService
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         return binding.root

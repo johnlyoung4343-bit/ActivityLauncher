@@ -14,7 +14,8 @@ import de.szalkowski.activitylauncher.services.ActivityListService
 import de.szalkowski.activitylauncher.services.MyActivityInfo
 
 class ActivityListAdapter @AssistedInject constructor(
-    activityListService: ActivityListService, @Assisted private val packageName: String
+    activityListService: ActivityListService,
+    @Assisted private val packageName: String,
 ) : RecyclerView.Adapter<ActivityListAdapter.ViewHolder>() {
     @AssistedFactory
     interface ActivityListAdapterFactory {
@@ -38,20 +39,28 @@ class ActivityListAdapter @AssistedInject constructor(
     var filter: String = ""
         set(value) {
             field = value
-            filteredActivities = listOfNotNull(allActivities.defaultActivity?.takeIf { a ->
+            filteredActivities = listOfNotNull(
+                allActivities.defaultActivity?.takeIf { a ->
+                    listOf(
+                        allActivities.packageName,
+                        allActivities.name,
+                        a.name,
+                        a.componentName.className,
+                    ).any {
+                        it.contains(
+                            field,
+                            ignoreCase = true,
+                        )
+                    }
+                },
+            ) + allActivities.activities.filter { a ->
                 listOf(
-                    allActivities.packageName, allActivities.name, a.name, a.componentName.className
+                    a.name,
+                    a.componentName.shortClassName,
                 ).any {
                     it.contains(
-                        field, ignoreCase = true
-                    )
-                }
-            }) + allActivities.activities.filter { a ->
-                listOf(
-                    a.name, a.componentName.shortClassName
-                ).any {
-                    it.contains(
-                        field, ignoreCase = true
+                        field,
+                        ignoreCase = true,
                     )
                 }
             }
@@ -90,5 +99,3 @@ class ActivityListAdapter @AssistedInject constructor(
         ivIcon.setImageDrawable(item.icon)
     }
 }
-
-

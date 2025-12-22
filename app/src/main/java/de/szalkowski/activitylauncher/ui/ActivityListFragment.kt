@@ -30,7 +30,7 @@ class ActivityListFragment : Fragment() {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,9 @@ class ActivityListFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentActivityListBinding.inflate(inflater, container, false)
         return binding.root
@@ -77,7 +79,7 @@ class ActivityListFragment : Fragment() {
             Toast.makeText(
                 requireContext(),
                 getString(R.string.error_invalid_activity_link),
-                Toast.LENGTH_LONG
+                Toast.LENGTH_LONG,
             )
                 .show()
         }
