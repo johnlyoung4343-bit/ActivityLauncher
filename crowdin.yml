@@ -1,4 +1,1 @@
-files:
-  - source: crowdin.yml
-    translation: crowdin.yml
-    multilingual: 1
+files: []
